@@ -1,0 +1,74 @@
+{
+    "name": "saveMacro test",
+    "description": "saveMacro test",
+    "key": "com.mxgraph.confluence.plugins.savemacro",
+    "baseUrl": "https://78e9b224.ngrok.io",
+    "vendor": 
+    {
+        "name": "JGraph ltd.",
+        "url": "https://www.jgraph.com"
+    },
+     "version": "1.0.0",
+    "authentication": 
+    {
+        "type": "none"
+    },
+    "modules": 
+    {
+        "dynamicContentMacros": 
+        [
+            {
+                "name": 
+                {
+                    "i18n": "savemacrotest",
+                    "value": "saveMacro test"
+                },
+                "featured": true,
+                "url": "/viewer.html?count=${count}",
+                "width": "600px",
+                "height": "400px",
+                "description": 
+                {
+                    "i18n": "description",
+                    "value": "Tests saveMacro"
+                }, "icon": 
+                {
+		          "width": 144,
+		          "height": 144,
+		          "url": "/google-drive-connector-atlas.png"
+		        },
+		        "categories": [
+		          "visuals"
+		        ],
+		        "outputType": "block",
+		        "featured": true,
+                "key": "savemacrotest",
+			    "name": 
+			    {
+			    	"value": "saveMacro test"
+			    },
+			    "editor": {
+				    "url": "/macroEditor.html?count=${count}",
+				    "width": "1200px",
+				    "height": "600px"
+				},
+			    "parameters": 
+			    [
+				    {
+				      "identifier": "count",
+				      "name": 
+				      {
+				        "value": "Count number of save macro calls"
+				      },
+				      "type": "string",
+				       "hidden": false
+				    }
+  				]
+            }
+        ]
+    },
+    "scopes": [
+    "read",
+    "write"
+  	]
+}

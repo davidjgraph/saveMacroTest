@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="ac.js" type="text/javascript"></script>
+<link rel="stylesheet" href="//aui-cdn.atlassian.com/aui-adg/5.9.12/css/aui.min.css" media="all">
+
+<style type="text/css">
+body {
+	font-family: Arial, sans-serif;
+	overflow: hidden;
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+</style>
+<script type="text/javascript">
+	var baseUrl = AC.getUrlParam('xdm_e', true) + AC.getUrlParam('cp', true);
+	var connectUrl = baseUrl + '/atlassian-connect';
+
+	var macroDialog = null;
+	
+	var head = document.getElementsByTagName("head")[0];
+
+	function loadAtlassianApi() 
+	{
+		var script = document.createElement("script");
+		script.src = connectUrl + '/all.js';
+		script.setAttribute('data-options', 'resize:false;margin:false');
+
+		script.onload = function() 
+		{
+			AP.require([ "confluence", "dialog" ], function(confluence, dialog) 
+			{
+				function onSubmit() 
+				{
+					var macroParams = 
+					{
+						count : '2'
+					};
+		
+					// Second save macro when editor exits
+					confluence.saveMacro(macroParams);
+					confluence.closeMacroEditor();
+					return true;
+				}
+				
+				confluence.getMacroData(function(macroParams) 
+				{
+					
+					if(macroParams != null && Object.keys(macroParams).length > 0) 
+					{
+						loadMacroParameters(macroParams);
+
+						var macroParams = 
+						{
+							count : '1'
+						};
+			
+						// First save macro when editor is launched
+						confluence.saveMacro(macroParams);
+					}
+			    });
+				
+				macroDialog = dialog;
+				dialog.getButton("submit").bind(onSubmit);
+			});
+		};
+		
+		head.appendChild(script);
+	}
+	
+	function loadMacroParameters(macroParams) 
+	{
+		$('#count').val(macroParams.count);    
+	}
+	
+	loadAtlassianApi();
+
+</script>
+</head>
+<body style="height : 600px">
+<div style="height : 100%;">
+	<div style="height : 100%; width : 350px;border-right : 1px solid #cccccc;float : left;">
+	</div>
+	<div id="preview" style="height : 100%; float : left;">
+	</div>
+</div>
+</body>
+</html>
