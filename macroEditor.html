@@ -47,18 +47,14 @@ body {
 				}
 				
 				confluence.getMacroData(function(macroParams) 
-				{
-					
-					if(macroParams != null && Object.keys(macroParams).length > 0) 
+				{					
+					var macroParams = 
 					{
-						var macroParams = 
-						{
-							count : '1'
-						};
-			
-						// First save macro when editor is launched
-						confluence.saveMacro(macroParams);
-					}
+						count : '1'
+					};
+		
+					// First save macro when editor is launched
+					confluence.saveMacro(macroParams);
 			    });
 				
 				macroDialog = dialog;
